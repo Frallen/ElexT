@@ -22,6 +22,11 @@ ul {
   margin: 0;
   color: @black;
 }
+h1,
+h2,
+h3 {
+  font-weight: 700;
+}
 .input {
   outline: none;
   width: 100%;
@@ -49,7 +54,6 @@ body {
   .br(10px);
   .trs(0.3s);
   font-weight: 400;
-
 }
 .button:hover {
   .trs(0.3s);

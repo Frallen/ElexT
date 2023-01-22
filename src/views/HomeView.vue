@@ -20,7 +20,7 @@
       </div>
       <BlueButton class="dashboard-form-button">Добавить</BlueButton>
     </Form>
-    <div class="dashboard-box" v-if="task">
+    <div class="dashboard-box" v-if="task.length > 0">
       <transition-group name="fade">
         <div
           class="dashboard-box-item shadow"
@@ -38,7 +38,9 @@
         </div></transition-group
       >
     </div>
-    <div class="dashboard-box-empty" v-else></div>
+    <div class="dashboard-empty" v-else>
+      <h2>Пока что заметок нет...</h2>
+    </div>
   </div>
 </template>
 
@@ -81,13 +83,34 @@ let deleteItem = (id) => {
 </script>
 <style lang="less">
 h1 {
-  margin: 1em 0 1em;
+  margin: 1em 0 10px;
+  font-size: 3em;
+  @media @md {
+    font-size: 2em;
+  }
 }
 .dashboard {
   display: flex;
   justify-content: space-between;
   @media @md {
     flex-direction: column;
+  }
+  &-empty {
+    width: 65%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    h2 {
+      font-size: 2em;
+      text-align: center;
+      @media @md {
+        font-size: 1.5em;
+      }
+    }
+    @media @md {
+      width: 100%;
+      margin-top: 2em;
+    }
   }
   &-box {
     display: flex;
