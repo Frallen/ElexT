@@ -2,7 +2,7 @@
   <h1>Мои заметки</h1>
   <div class="dashboard">
     <Form
-      :Schema="Schema"
+      :Schema="DefaultSchema"
       @submit-form="onSubmit"
       class="dashboard-form shadow"
     >
@@ -46,13 +46,13 @@
 
 <script setup>
 import { useRouter } from "vue-router";
-import * as yup from "yup";
 import Form from "@/components/Form.vue";
 import { Field, ErrorMessage } from "vee-validate";
 import BlueButton from "@/components/BlueButton.vue";
-import { computed, ref } from "vue";
+import { ref } from "vue";
 import RedButton from "@/components/RedButton.vue";
 import { getStorage } from "@/composables/useParse";
+import { DefaultSchema } from "@/composables/useSchema";
 
 let task = ref("task");
 let router = useRouter();
@@ -65,18 +65,12 @@ let onSubmit = (data) => {
 
 task.value = getStorage();
 
-let Schema = computed(() => {
-  return yup.object({
-    Title: yup.string().required(() => "Это обязательное поле"),
-    Text: yup.string().required(() => "Это обязательное поле"),
-  });
-});
 let deleteItem = (id) => {
-  let tasks = JSON.parse(localStorage.getItem("task")) ?? [];
-
   localStorage.setItem(
     "task",
-    JSON.stringify(tasks.filter((p) => p.id.toString() !== id.toString()))
+    JSON.stringify(
+      getStorage().filter((p) => p.id.toString() !== id.toString())
+    )
   );
   task.value = getStorage();
 };

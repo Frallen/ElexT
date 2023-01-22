@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
-import {getStorage} from "@/composables/useParse";
+import { getStorage } from "@/composables/useParse";
 
 const routes = [
   {
